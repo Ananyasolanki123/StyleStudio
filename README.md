@@ -97,6 +97,11 @@ Trail Room
 6. Import CLIP file (https://github.com/Ananyasolanki123/CLIP-file)
 7. Import Hybrid Model File (https://github.com/Ananyasolanki123/Hybrid-model)
 8. Run the app on emulator or deploy to web/iOS/Android
+9. pip install scikit-learn
+10.pip install flask torch torchvision transformers scikit-learn pillow
+11.pip install torch torchvision transformers fastapi pillow
+12.pip install flask pillow requests
+
 
 ### Option 2: Clone from GitHub (optional Flutter code export)
 
