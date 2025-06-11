@@ -1,0 +1,1123 @@
+                                         //Widget
+import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
+import 'dart:ui';
+import '/index.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import 'profile_model.dart';
+export 'profile_model.dart';
+
+/// Create a page"Design a stylish mobile app profile page for a fashion
+/// design app named StyleStudio.
+///
+/// The layout should include:
+///
+/// A top section with a circular user profile picture, username (e.g.,
+/// @ananyastyle), and a short bio line like 'Passionate Fashion Explorer'.
+///
+/// Two rounded counters showing Designs Created and Games Played with icons.
+///
+/// A grid or scrollable section showing My Designs — cards or thumbnails of
+/// dresses designed by the user.
+///
+/// An Edit Profile button with a pastel color.
+///
+/// A section at the bottom with links: Upload Design, Saved Designs, Logout.
+class ProfileWidget extends StatefulWidget {
+  const ProfileWidget({super.key});
+
+  static String routeName = 'profile';
+  static String routePath = '/profile';
+
+  @override
+  State<ProfileWidget> createState() => _ProfileWidgetState();
+}
+
+class _ProfileWidgetState extends State<ProfileWidget> {
+  late ProfileModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ProfileModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color(0xFFF8F5FF),
+        appBar: AppBar(
+          backgroundColor: Color(0x00FFFFFF),
+          automaticallyImplyLeading: false,
+          title: Text(
+            'StyleStudio',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  font: GoogleFonts.qwitcherGrypen(
+                    fontWeight: FontWeight.w600,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
+                  color: Color(0xFFEB7FB1),
+                  fontSize: 70,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.w600,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                ),
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+              child: FlutterFlowIconButton(
+                borderRadius: 40,
+                buttonSize: 40,
+                icon: Icon(
+                  Icons.settings,
+                  color: Color(0xFFEB7FB1),
+                  size: 24,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                },
+              ),
+            ),
+          ],
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: SafeArea(
+          top: true,
+          child: Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 220,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Color(0xFFB19CD9), Color(0xFFE2A5DE)],
+                        stops: [0, 1],
+                        begin: AlignmentDirectional(1, 1),
+                        end: AlignmentDirectional(-1, -1),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: Image.asset(
+                                  'assets/images/6c3d3e46-38f6-4991-ac6b-b56dc46bee99.jpg',
+                                ).image,
+                              ),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 3,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                            child: Text(
+                              valueOrDefault<String>(
+                                FFAppState().UserID,
+                                '@ananya',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .titleLarge
+                                  .override(
+                                    font: GoogleFonts.interTight(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                            child: Text(
+                              valueOrDefault<String>(
+                                FFAppState().USERBIO,
+                                'fashion enthusiast',
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0, -1),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(24, 5, 24, 0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 10,
+                              color: Color(0x15000000),
+                              offset: Offset(
+                                0,
+                                5,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 24),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                width: 150,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF5EEFF),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(16),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.palette,
+                                            color: Color(0xFFB19CD9),
+                                            size: 24,
+                                          ),
+                                          Text(
+                                            '42',
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleMedium
+                                                .override(
+                                                  font: GoogleFonts.interTight(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFFB19CD9),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 8)),
+                                      ),
+                                      Text(
+                                        'Designs Created',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF666666),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 150,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFF5EEFF),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(16),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.sports_esports,
+                                            color: Color(0xFFB19CD9),
+                                            size: 24,
+                                          ),
+                                          Text(
+                                            '18',
+                                            style: FlutterFlowTheme.of(context)
+                                                .titleMedium
+                                                .override(
+                                                  font: GoogleFonts.interTight(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFFB19CD9),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleMedium
+                                                          .fontStyle,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(width: 8)),
+                                      ),
+                                      Text(
+                                        'Games Played',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF666666),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'My Designs',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleMedium
+                                    .override(
+                                      font: GoogleFonts.interTight(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
+                              ),
+                              FFButtonWidget(
+                                onPressed: () async {
+                                  context.goNamed(SeeallWidget.routeName);
+                                },
+                                text: 'See All',
+                                options: FFButtonOptions(
+                                  height: 36,
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 0),
+                                  color: Color(0xFFF5EEFF),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        font: GoogleFonts.inter(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: Color(0xFFB19CD9),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                  elevation: 0,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                          child: GridView(
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
+                              childAspectRatio: 0.8,
+                            ),
+                            primary: false,
+                            shrinkWrap: true,
+                            children: [
+                              Container(
+                                width: 160,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.network(
+                                      '\"500x500?fashion dress\"',
+                                    ).image,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x10000000),
+                                      offset: Offset(
+                                        0,
+                                        2,
+                                      ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: Image.asset(
+                                        'assets/images/Women_s_Plus_Size_Dresses___Curvy_Dresses___SHEIN_-removebg-preview.png',
+                                      ).image,
+                                    ),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.transparent,
+                                        Color(0x80000000)
+                                      ],
+                                      stops: [0, 1],
+                                      begin: AlignmentDirectional(0, 1),
+                                      end: AlignmentDirectional(0, -1),
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 1),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 0, 12, 12),
+                                      child: Text(
+                                        'Summer Dress',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 160,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.network(
+                                      '\"500x500?fashion outfit\"',
+                                    ).image,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x10000000),
+                                      offset: Offset(
+                                        0,
+                                        2,
+                                      ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: Image.asset(
+                                        'assets/images/4f36b6bc-3065-4a9e-9655-3201a509fcd6-removebg-preview.png',
+                                      ).image,
+                                    ),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.transparent,
+                                        Color(0x80000000)
+                                      ],
+                                      stops: [0, 1],
+                                      begin: AlignmentDirectional(0, 1),
+                                      end: AlignmentDirectional(0, -1),
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 1),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 0, 12, 12),
+                                      child: Text(
+                                        'Casual Outfit',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 160,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.network(
+                                      '\"500x500?fashion evening gown\"',
+                                    ).image,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x10000000),
+                                      offset: Offset(
+                                        0,
+                                        2,
+                                      ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.transparent,
+                                        Color(0x80000000)
+                                      ],
+                                      stops: [0, 1],
+                                      begin: AlignmentDirectional(0, 1),
+                                      end: AlignmentDirectional(0, -1),
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 1),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 0, 12, 12),
+                                      child: Text(
+                                        'Evening Gown',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 160,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: Image.network(
+                                      '\"500x500?fashion jumpsuit\"',
+                                    ).image,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4,
+                                      color: Color(0x10000000),
+                                      offset: Offset(
+                                        0,
+                                        2,
+                                      ),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.transparent,
+                                        Color(0x80000000)
+                                      ],
+                                      stops: [0, 1],
+                                      begin: AlignmentDirectional(0, 1),
+                                      end: AlignmentDirectional(0, -1),
+                                    ),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional(-1, 1),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          12, 0, 12, 12),
+                                      child: Text(
+                                        'Modern Jumpsuit',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: AlignmentDirectional(0, 0),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                      child: FFButtonWidget(
+                        onPressed: () {
+                          print('Button pressed ...');
+                        },
+                        text: 'Edit Profile',
+                        options: FFButtonOptions(
+                          width: 200,
+                          height: 50,
+                          padding: EdgeInsets.all(8),
+                          iconPadding:
+                              EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          color: Color(0xFFF5EEFF),
+                          textStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0xFFB19CD9),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                          elevation: 0,
+                          borderSide: BorderSide(
+                            color: Color(0xFFB19CD9),
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF5EEFF),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    final selectedMedia =
+                                        await selectMediaWithSourceBottomSheet(
+                                      context: context,
+                                      allowPhoto: true,
+                                    );
+                                    if (selectedMedia != null &&
+                                        selectedMedia.every((m) =>
+                                            validateFileFormat(
+                                                m.storagePath, context))) {
+                                      safeSetState(() =>
+                                          _model.isDataUploading_uploadDataXvw =
+                                              true);
+                                      var selectedUploadedFiles =
+                                          <FFUploadedFile>[];
+
+                                      var downloadUrls = <String>[];
+                                      try {
+                                        selectedUploadedFiles = selectedMedia
+                                            .map((m) => FFUploadedFile(
+                                                  name: m.storagePath
+                                                      .split('/')
+                                                      .last,
+                                                  bytes: m.bytes,
+                                                  height: m.dimensions?.height,
+                                                  width: m.dimensions?.width,
+                                                  blurHash: m.blurHash,
+                                                ))
+                                            .toList();
+
+                                        downloadUrls = (await Future.wait(
+                                          selectedMedia.map(
+                                            (m) async => await uploadData(
+                                                m.storagePath, m.bytes),
+                                          ),
+                                        ))
+                                            .where((u) => u != null)
+                                            .map((u) => u!)
+                                            .toList();
+                                      } finally {
+                                        _model.isDataUploading_uploadDataXvw =
+                                            false;
+                                      }
+                                      if (selectedUploadedFiles.length ==
+                                              selectedMedia.length &&
+                                          downloadUrls.length ==
+                                              selectedMedia.length) {
+                                        safeSetState(() {
+                                          _model.uploadedLocalFile_uploadDataXvw =
+                                              selectedUploadedFiles.first;
+                                          _model.uploadedFileUrl_uploadDataXvw =
+                                              downloadUrls.first;
+                                        });
+                                      } else {
+                                        safeSetState(() {});
+                                        return;
+                                      }
+                                    }
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 16, 0),
+                                          child: Icon(
+                                            Icons.cloud_upload,
+                                            color: Color(0xFFB19CD9),
+                                            size: 24,
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Text(
+                                          'Upload Design',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF5EEFF),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.goNamed(SeeallWidget.routeName);
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 16, 0),
+                                          child: Icon(
+                                            Icons.bookmark,
+                                            color: Color(0xFFB19CD9),
+                                            size: 24,
+                                          ),
+                                        ),
+                                      ),
+                                      Align(
+                                        alignment: AlignmentDirectional(0, 0),
+                                        child: Text(
+                                          'Saved Designs',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyLarge
+                                              .override(
+                                                font: GoogleFonts.inter(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF5EEFF),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0, 0),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.goNamed(LoginpageWidget.routeName);
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Align(
+                                      alignment: AlignmentDirectional(0, 0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 16, 0),
+                                        child: Icon(
+                                          Icons.logout,
+                                          color: Color(0xFFB19CD9),
+                                          size: 24,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(0, 0),
+                                      child: Text(
+                                        'Logout',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              font: GoogleFonts.inter(
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
+                                              ),
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .fontStyle,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+                                                               //MODEL
+import '/backend/firebase_storage/storage.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/upload_data.dart';
+import 'dart:ui';
+import '/index.dart';
+import 'profile_widget.dart' show ProfileWidget;
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+class ProfileModel extends FlutterFlowModel<ProfileWidget> {
+  ///  State fields for stateful widgets in this page.
+
+  bool isDataUploading_uploadDataXvw = false;
+  FFUploadedFile uploadedLocalFile_uploadDataXvw =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl_uploadDataXvw = '';
+
+  @override
+  void initState(BuildContext context) {}
+
+  @override
+  void dispose() {}
+}
