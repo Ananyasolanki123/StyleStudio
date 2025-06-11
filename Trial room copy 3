@@ -1,0 +1,158 @@
+                                        //WIDGET
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import 'page4_copy_copy_model.dart';
+export 'page4_copy_copy_model.dart';
+
+class Page4CopyCopyWidget extends StatefulWidget {
+  const Page4CopyCopyWidget({super.key});
+
+  static String routeName = 'page4CopyCopy';
+  static String routePath = '/page4CopyCopy';
+
+  @override
+  State<Page4CopyCopyWidget> createState() => _Page4CopyCopyWidgetState();
+}
+
+class _Page4CopyCopyWidgetState extends State<Page4CopyCopyWidget> {
+  late Page4CopyCopyModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => Page4CopyCopyModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color(0xFFFD9E85),
+        body: SafeArea(
+          top: true,
+          child: Container(
+            width: 393,
+            height: 700,
+            decoration: BoxDecoration(
+              color: Color(0xFFFA9874),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                alignment: AlignmentDirectional(0, 0),
+                image: Image.asset(
+                  'assets/images/futuristic-store-with-abstract-concept-architecture_1_(2).png',
+                ).image,
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: 393,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Color(0x04FFFFFF),
+                      ),
+                      child: Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Text(
+                          'Trial Room',
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.qwitcherGrypen(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0xFFC93C5E),
+                                    fontSize: 65,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 100, 0, 0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      FFAppState().selecteddress = FFAppState().selecteddress;
+                    },
+                    child: Container(
+                      width: 215.1,
+                      height: 300,
+                      decoration: BoxDecoration(),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(0),
+                        child: Image.asset(
+                          'assets/images/4deb4f8c-286b-4f4a-bec4-9dcf754489ac-removebg-preview.png',
+                          width: 150,
+                          height: 185.5,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+                                                     //Model
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'page4_copy_copy_widget.dart' show Page4CopyCopyWidget;
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+class Page4CopyCopyModel extends FlutterFlowModel<Page4CopyCopyWidget> {
+  @override
+  void initState(BuildContext context) {}
+
+  @override
+  void dispose() {}
+}
